@@ -50,7 +50,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="MirrorWorld"
+config/name="Light the Game"
 run/main_scene="res://menus/main_menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
