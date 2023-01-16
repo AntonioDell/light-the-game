@@ -1,0 +1,74 @@
+[gd_scene load_steps=14 format=3 uid="uid://cgnq8uiblb38g"]
+
+[ext_resource type="Script" path="res://enemies/dummy_enemy.gd" id="1_l5m5h"]
+[ext_resource type="PackedScene" uid="uid://ctcokcq323wcn" path="res://damageable.tscn" id="2_sb1sg"]
+[ext_resource type="PackedScene" uid="uid://d0rdma5s1was1" path="res://health_tracker.tscn" id="3_xee48"]
+[ext_resource type="PackedScene" path="res://enemies/dummy_enemy_attack.tscn" id="4_hqq8j"]
+[ext_resource type="Animation" uid="uid://br6seuthord0g" path="res://enemies/anim_dummy_attack_anticipate.res" id="4_qg5vd"]
+[ext_resource type="Animation" uid="uid://b4piuxt4m35kg" path="res://enemies/anim_dummy_attack_execute.res" id="5_5pm4a"]
+[ext_resource type="PackedScene" uid="uid://c8g6q77nuod2e" path="res://enemies/flash_effect.tscn" id="7_x03td"]
+[ext_resource type="Texture2D" uid="uid://brcq83dco3wq0" path="res://enemies/flash_effect_texture.tres" id="8_ldmmf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kbjlg"]
+size = Vector2(34, 34)
+
+[sub_resource type="Gradient" id="Gradient_53l0f"]
+offsets = PackedFloat32Array(0.400621)
+colors = PackedColorArray(0.556863, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aw28b"]
+gradient = SubResource("Gradient_53l0f")
+width = 32
+height = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ionda"]
+size = Vector2(36, 36)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_myx7n"]
+_data = {
+"dummy_attack_anticipate": ExtResource("4_qg5vd"),
+"dummy_attack_execute": ExtResource("5_5pm4a")
+}
+
+[node name="DummyEnemy" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_l5m5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kbjlg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_aw28b")
+
+[node name="Damageable" parent="." instance=ExtResource("2_sb1sg")]
+
+[node name="CollisionShape2D" parent="Damageable" index="0"]
+shape = SubResource("RectangleShape2D_ionda")
+
+[node name="HealthTracker" parent="." instance=ExtResource("3_xee48")]
+max_health = 2.0
+initial_health = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_myx7n")
+}
+
+[node name="DummyEnemyAttack" parent="." node_paths=PackedStringArray("attack_animation_player") instance=ExtResource("4_hqq8j")]
+range = 40
+attack_animation_player = NodePath("../AnimationPlayer")
+anim_anticipate_attack = ExtResource("4_qg5vd")
+anim_execute_attack = ExtResource("5_5pm4a")
+
+[node name="FlashEffect" parent="." instance=ExtResource("7_x03td")]
+
+[node name="DamageLight" parent="FlashEffect" index="0"]
+texture = ExtResource("8_ldmmf")
+
+[connection signal="damage_taken" from="Damageable" to="." method="_on_damageable_damage_taken"]
+[connection signal="health_depleted" from="HealthTracker" to="." method="_on_health_tracker_health_depleted"]
+[connection signal="attack_finished" from="DummyEnemyAttack" to="." method="_on_dummy_enemy_attack_attack_finished"]
+[connection signal="attack_started" from="DummyEnemyAttack" to="." method="_on_dummy_enemy_attack_attack_started"]
+
+[editable path="Damageable"]
+[editable path="FlashEffect"]

@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://r125yfuy1h1r"]
+
+[ext_resource type="Script" path="res://enemies/enemy_spawner.gd" id="1_ay2lf"]
+[ext_resource type="PackedScene" uid="uid://ctcokcq323wcn" path="res://damageable.tscn" id="1_g4jck"]
+[ext_resource type="PackedScene" uid="uid://d0rdma5s1was1" path="res://health_tracker.tscn" id="3_vbfvn"]
+[ext_resource type="PackedScene" uid="uid://c8g6q77nuod2e" path="res://enemies/flash_effect.tscn" id="4_x3n5p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkjxy"]
+size = Vector2(128, 64)
+
+[sub_resource type="Gradient" id="Gradient_di8ri"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.681486, 0.343891, 0.120577, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l2dh2"]
+gradient = SubResource("Gradient_di8ri")
+width = 128
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k21y5"]
+size = Vector2(128, 64)
+
+[sub_resource type="Gradient" id="Gradient_4sqi5"]
+offsets = PackedFloat32Array(0, 0.671642, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.237539, 0.237539, 0.237539, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c4oui"]
+gradient = SubResource("Gradient_4sqi5")
+width = 128
+fill_from = Vector2(1, 1)
+
+[node name="EnemySpawner" type="CharacterBody2D"]
+collision_layer = 3
+script = ExtResource("1_ay2lf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qkjxy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_l2dh2")
+
+[node name="Damageable" parent="." instance=ExtResource("1_g4jck")]
+
+[node name="CollisionShape2D" parent="Damageable" index="0"]
+shape = SubResource("RectangleShape2D_k21y5")
+
+[node name="HealthTracker" parent="." instance=ExtResource("3_vbfvn")]
+max_health = 5.0
+initial_health = 5.0
+
+[node name="FlashEffect" parent="." instance=ExtResource("4_x3n5p")]
+
+[node name="DamageLight" parent="FlashEffect" index="0"]
+texture = SubResource("GradientTexture2D_c4oui")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="damage_taken" from="Damageable" to="." method="_on_damageable_damage_taken"]
+[connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]
+[connection signal="health_depleted" from="HealthTracker" to="." method="_on_health_tracker_health_depleted"]
+
+[editable path="Damageable"]
+[editable path="FlashEffect"]

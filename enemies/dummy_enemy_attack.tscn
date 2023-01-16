@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://enemies/dummy_enemy_attack.gd" id="1_rkj48"]
+[ext_resource type="Script" path="res://damage.gd" id="2_b5y5t"]
+
+[node name="DummyEnemyAttack" type="Node2D"]
+script = ExtResource("1_rkj48")
+range = 30
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("2_b5y5t")
+
+[node name="PlayerDetector" type="RayCast2D" parent="."]
+target_position = Vector2(30, 0)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false

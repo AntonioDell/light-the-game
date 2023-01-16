@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Theme" uid="uid://bec3vhnm7i0eq" path="res://main_theme.tres" id="1_luwly"]
+[ext_resource type="Script" path="res://menus/main_menu.gd" id="1_xylio"]
+[ext_resource type="Texture2D" uid="uid://c1jgrxvih1wuy" path="res://player/light_circle.png" id="2_hbtl3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sebdv"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sebdv")
+script = ExtResource("1_xylio")
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -397.0
+offset_top = -140.5
+offset_right = 397.0
+offset_bottom = -3.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_luwly")
+theme_override_font_sizes/normal_font_size = 100
+text = "Light, The Game"
+fit_content_height = true
+
+[node name="Subtitle" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -1.0
+offset_right = 285.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "A game about darkness"
+fit_content_height = true
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = 132.0
+offset_right = 93.0
+offset_bottom = 209.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 42
+text = "Start"
+icon_alignment = 1
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="CursorLight" type="PointLight2D" parent="."]
+position = Vector2(246, 262)
+color = Color(0.694118, 0.396078, 0.160784, 1)
+energy = 1.35
+blend_mode = 2
+texture = ExtResource("2_hbtl3")
+texture_scale = 6.0
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

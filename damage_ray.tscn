@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmo2ww2ad7oww"]
+
+[ext_resource type="Script" path="res://damage_ray.gd" id="1_b0d21"]
+[ext_resource type="Script" path="res://damage.gd" id="2_6ni1h"]
+
+[node name="DamageRay" type="RayCast2D"]
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+script = ExtResource("1_b0d21")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("2_6ni1h")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

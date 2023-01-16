@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://cvrg8opnk8xfd"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_1h71h"]
+[ext_resource type="Script" path="res://damageable.gd" id="2_a4m0c"]
+[ext_resource type="PackedScene" uid="uid://nrpl8hbycohd" path="res://player/lamp.tscn" id="3_gyvet"]
+[ext_resource type="Texture2D" uid="uid://c1jgrxvih1wuy" path="res://player/light_circle.png" id="4_8bx3t"]
+[ext_resource type="PackedScene" uid="uid://brtlthyh5ytpu" path="res://invincibility.tscn" id="5_4knpj"]
+[ext_resource type="Script" path="res://health_tracker.gd" id="6_ha00m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xi8c"]
+size = Vector2(32, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkr8c"]
+size = Vector2(32, 64)
+
+[sub_resource type="Gradient" id="Gradient_7dmh3"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.268915, 0.165039, 0.548083, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eacxm"]
+gradient = SubResource("Gradient_7dmh3")
+width = 32
+
+[sub_resource type="Animation" id="Animation_e073p"]
+resource_name = "invincibility_active"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 11.7127),
+"update": 0,
+"values": [Color(0.207843, 0.207843, 0.207843, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_43oqr"]
+_data = {
+"invincibility_active": SubResource("Animation_e073p")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_1h71h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2xi8c")
+
+[node name="Damageable" type="Area2D" parent="."]
+script = ExtResource("2_a4m0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damageable"]
+shape = SubResource("RectangleShape2D_fkr8c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.560784, 0.560784, 0.560784, 1)
+texture = SubResource("GradientTexture2D_eacxm")
+
+[node name="Lamp" parent="." instance=ExtResource("3_gyvet")]
+
+[node name="BaseLight" type="PointLight2D" parent="."]
+energy = 0.7
+shadow_enabled = true
+texture = ExtResource("4_8bx3t")
+texture_scale = 6.0
+
+[node name="Invincibility" parent="." instance=ExtResource("5_4knpj")]
+
+[node name="HealthTracker" type="Node" parent="."]
+script = ExtResource("6_ha00m")
+max_health = 3.0
+initial_health = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_43oqr")
+}
+
+[connection signal="damage_taken" from="Damageable" to="." method="_on_damageable_damage_taken"]
+[connection signal="invincibility_started" from="Invincibility" to="." method="_on_invincibility_started"]
+[connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]
+[connection signal="health_depleted" from="HealthTracker" to="." method="_on_health_tracker_health_depleted"]
