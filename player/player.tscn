@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://health_tracker.gd" id="6_ha00m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xi8c"]
-size = Vector2(32, 64)
+size = Vector2(32, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkr8c"]
 size = Vector2(32, 64)
@@ -46,6 +46,7 @@ motion_mode = 1
 script = ExtResource("1_1h71h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 26.5)
 shape = SubResource("RectangleShape2D_2xi8c")
 
 [node name="Damageable" type="Area2D" parent="."]
@@ -79,6 +80,7 @@ libraries = {
 }
 
 [connection signal="damage_taken" from="Damageable" to="." method="_on_damageable_damage_taken"]
+[connection signal="light_mode_changed" from="Lamp" to="." method="_on_lamp_light_mode_changed"]
 [connection signal="invincibility_started" from="Invincibility" to="." method="_on_invincibility_started"]
 [connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]
 [connection signal="health_depleted" from="HealthTracker" to="." method="_on_health_tracker_health_depleted"]

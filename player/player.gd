@@ -1,8 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-
-const SPEED = 300.0
+@export var speed = 300.0
 
 @onready var _invincibility := $Invincibility as Invincibility
 @onready var _health_tracker := $HealthTracker as HealthTracker
@@ -23,9 +22,9 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Vector2(Input.get_axis("walk_left", "walk_right"), Input.get_axis( "walk_up", "walk_down"))
 	if direction != Vector2.ZERO:
-		velocity = direction * SPEED
+		velocity = direction * speed
 	else:
-		velocity = Vector2(move_toward(velocity.x, 0, SPEED), move_toward(velocity.y, 0, SPEED))
+		velocity = Vector2(move_toward(velocity.x, 0, speed), move_toward(velocity.y, 0, speed))
 
 	move_and_slide()
 
@@ -46,3 +45,10 @@ func _on_health_tracker_health_depleted():
 
 func _on_health_tracker_health_changed(current_health):
 	GameState.player_health = current_health
+
+
+func _on_lamp_light_mode_changed(light_mode: Lamp.LightMode):
+	if light_mode == Lamp.LightMode.BEAM:
+		speed = 50.0
+	else:
+		speed = 300.0

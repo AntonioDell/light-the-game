@@ -1,6 +1,9 @@
 extends Node2D
+class_name Lamp
 
 enum LightMode {CONE, BEAM}
+
+signal light_mode_changed(light_mode: LightMode)
 
 
 @export var movement_radius := 20:
@@ -42,6 +45,7 @@ func _set_light_mode(new_mode: LightMode):
 				_light_beam_damage_ray.enabled = true
 				_rotation_speed = beam_rotation_speed
 		_current_mode = new_mode
+		emit_signal("light_mode_changed", _current_mode)
 
 
 func _ready():
