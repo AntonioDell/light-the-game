@@ -14,7 +14,7 @@ signal light_mode_changed(light_mode: LightMode)
 	set(new_value):
 		max_beam_distance = new_value
 		_current_beam_distance = max_beam_distance
-@export var beam_rotation_speed := .5
+@export var beam_rotation_speed := 1
 @export var cone_rotation_speed := 10
 
 @onready var _light_origin := $LightOrigin as Node2D
@@ -28,36 +28,41 @@ signal light_mode_changed(light_mode: LightMode)
 		if _light_beam != null:
 			_light_beam.scale.x = _current_beam_distance
 
-var _current_mode: LightMode:
-	get = _get_current_mode, set = _set_light_mode
-func _get_current_mode() -> LightMode:
-	return _current_mode
-func _set_light_mode(new_mode: LightMode):
-		match  new_mode:
-			LightMode.CONE: 
-				_light_cone.visible = true
-				_light_beam.visible = false
-				_light_beam_damage_ray.enabled = false
-				_rotation_speed = cone_rotation_speed
-			LightMode.BEAM: 
-				_light_cone.visible = false
-				_light_beam.visible = true
-				_light_beam_damage_ray.enabled = true
-				_rotation_speed = beam_rotation_speed
-		_current_mode = new_mode
-		emit_signal("light_mode_changed", _current_mode)
+var _current_mode: LightMode
 
 
 func _ready():
-	_current_mode = LightMode.CONE
 	_light_origin.position = Vector2.RIGHT * movement_radius
+	_change_light_mode(LightMode.CONE)
 
 
 func _unhandled_input(event):
-	if Input.is_action_just_pressed("light_beam"):
-		_current_mode = LightMode.BEAM
-	elif Input.is_action_just_released("light_beam"):
-		_current_mode = LightMode.CONE
+	if Input.is_action_just_released("switch_lamp"):
+		_change_light_mode(LightMode.BEAM if _current_mode == LightMode.CONE else LightMode.CONE)
+
+
+func _change_light_mode(new_mode: LightMode):
+	_light_origin.visible = false
+	if new_mode == LightMode.BEAM:
+		await get_tree().create_timer(.5).timeout
+	else:
+		await get_tree().create_timer(.1).timeout
+	
+	match  new_mode:
+		LightMode.CONE: 
+			_light_cone.visible = true
+			_light_beam.visible = false
+			_light_beam_damage_ray.enabled = false
+			_rotation_speed = cone_rotation_speed
+		LightMode.BEAM: 
+			_light_cone.visible = false
+			_light_beam.visible = true
+			_light_beam_damage_ray.enabled = true
+			_rotation_speed = beam_rotation_speed
+	_current_mode = new_mode
+	
+	_light_origin.visible = true
+
 
 
 func _physics_process(delta):
