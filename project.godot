@@ -8,56 +8,10 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "Node",
-"class": &"Damage",
-"language": &"GDScript",
-"path": "res://damage.gd"
-}, {
-"base": "Area2D",
-"class": &"Damageable",
-"language": &"GDScript",
-"path": "res://damageable.gd"
-}, {
-"base": "Node2D",
-"class": &"FlashEffect",
-"language": &"GDScript",
-"path": "res://enemies/flash_effect.gd"
-}, {
-"base": "Node",
-"class": &"HealthTracker",
-"language": &"GDScript",
-"path": "res://health_tracker.gd"
-}, {
-"base": "Node2D",
-"class": &"Invincibility",
-"language": &"GDScript",
-"path": "res://invincibility.gd"
-}, {
-"base": "Node2D",
-"class": &"Lamp",
-"language": &"GDScript",
-"path": "res://player/lamp.gd"
-}, {
-"base": "CharacterBody2D",
-"class": &"Player",
-"language": &"GDScript",
-"path": "res://player/player.gd"
-}]
-_global_script_class_icons={
-"Damage": "",
-"Damageable": "",
-"FlashEffect": "",
-"HealthTracker": "",
-"Invincibility": "",
-"Lamp": "",
-"Player": ""
-}
-
 [application]
 
 config/name="Light the Game"
-run/main_scene="res://menus/main_menu.tscn"
+run/main_scene="res://ui/main_menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -65,6 +19,14 @@ config/icon="res://icon.svg"
 
 DebugFunctions="*res://globals/debug_functions.gd"
 GameState="*res://globals/game_state.tscn"
+
+[editor]
+
+export/convert_text_resources_to_binary=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
 
 [input]
 

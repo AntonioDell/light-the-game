@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://uahlfnhlggov"]
+
+[ext_resource type="Script" path="res://ui/wave_ui.gd" id="1_qjijc"]
+
+[node name="WaveUI" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qjijc")
+
+[node name="WaveChanged" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(302, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="WaveChanged"]
+custom_minimum_size = Vector2(119, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 45
+text = "Wave"
+fit_content_height = true
+
+[node name="Control" type="Control" parent="WaveChanged"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="CurrentWave" type="RichTextLabel" parent="WaveChanged"]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 45
+text = "XXX"
+fit_content_height = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="WaveChangedVisibleTimer" type="Timer" parent="."]
+wait_time = 3.0

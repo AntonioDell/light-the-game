@@ -48,8 +48,9 @@ func _attack(target: Vector2):
 	emit_signal("attack_started")
 	var anticipate_key = attack_animation_player.find_animation(anim_anticipate_attack)
 	var execute_key = attack_animation_player.find_animation(anim_execute_attack)
-	attack_animation_player.stop()
-	attack_animation_player.clear_queue()
+	if attack_animation_player.is_playing():
+		attack_animation_player.stop()
+		attack_animation_player.clear_queue()
 	attack_animation_player.queue(anticipate_key)
 	attack_animation_player.queue(execute_key)
 	var result = await attack_animation_player.animation_changed

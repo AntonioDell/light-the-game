@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://glcdgpnlisr6"]
 
 [ext_resource type="Theme" uid="uid://bec3vhnm7i0eq" path="res://main_theme.tres" id="1_luwly"]
-[ext_resource type="Script" path="res://menus/main_menu.gd" id="1_xylio"]
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_xylio"]
 [ext_resource type="Texture2D" uid="uid://c1jgrxvih1wuy" path="res://player/light_circle.png" id="2_hbtl3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sebdv"]

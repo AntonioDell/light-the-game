@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://menus/end_menu.gd" id="1_77amr"]
+[ext_resource type="Script" path="res://ui/end_menu.gd" id="1_77amr"]
 [ext_resource type="Theme" uid="uid://bec3vhnm7i0eq" path="res://main_theme.tres" id="2_s3c37"]
 [ext_resource type="Texture2D" uid="uid://c1jgrxvih1wuy" path="res://player/light_circle.png" id="3_yw5di"]
 

@@ -5,26 +5,26 @@
 [ext_resource type="PackedScene" uid="uid://d0rdma5s1was1" path="res://health_tracker.tscn" id="3_vbfvn"]
 [ext_resource type="PackedScene" uid="uid://c8g6q77nuod2e" path="res://enemies/flash_effect.tscn" id="4_x3n5p"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2ua2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55tce"]
 size = Vector2(128, 11)
 
-[sub_resource type="Gradient" id="Gradient_iif3h"]
+[sub_resource type="Gradient" id="Gradient_jmtcj"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.681486, 0.343891, 0.120577, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0351y"]
-gradient = SubResource("Gradient_iif3h")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_26c6l"]
+gradient = SubResource("Gradient_jmtcj")
 width = 128
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6h3l3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ipfn"]
 size = Vector2(128, 64)
 
-[sub_resource type="Gradient" id="Gradient_61xnp"]
+[sub_resource type="Gradient" id="Gradient_udhj1"]
 offsets = PackedFloat32Array(0, 0.671642, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.237539, 0.237539, 0.237539, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8ly2y"]
-gradient = SubResource("Gradient_61xnp")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_66fma"]
+gradient = SubResource("Gradient_udhj1")
 width = 128
 fill_from = Vector2(1, 1)
 
@@ -33,15 +33,15 @@ script = ExtResource("1_ay2lf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 26.5)
-shape = SubResource("RectangleShape2D_y2ua2")
+shape = SubResource("RectangleShape2D_55tce")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_0351y")
+texture = SubResource("GradientTexture2D_26c6l")
 
 [node name="Damageable" parent="." instance=ExtResource("1_g4jck")]
 
 [node name="CollisionShape2D" parent="Damageable" index="0"]
-shape = SubResource("RectangleShape2D_6h3l3")
+shape = SubResource("RectangleShape2D_1ipfn")
 
 [node name="HealthTracker" parent="." instance=ExtResource("3_vbfvn")]
 max_health = 5.0
@@ -50,11 +50,12 @@ initial_health = 5.0
 [node name="FlashEffect" parent="." instance=ExtResource("4_x3n5p")]
 
 [node name="DamageLight" parent="FlashEffect" index="0"]
-texture = SubResource("GradientTexture2D_8ly2y")
+texture = SubResource("GradientTexture2D_66fma")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
 autostart = true
 
 [node name="SpawnPoints" type="Node2D" parent="."]

@@ -1,12 +1,11 @@
 extends CharacterBody2D
+class_name EnemySpawner
+
+
+signal enemy_defeated
 
 
 const SPEED = 50.0
-const JUMP_VELOCITY = -400.0
-
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 @export var enemy_spawn_interval := 5.0:
@@ -38,10 +37,9 @@ func _ready():
 	_spawn_timer.wait_time = enemy_spawn_interval
 	# Find control points to patrol between
 	_control_point_1 = global_position
-	var camera := get_viewport().get_camera_2d()
 	while _control_point_2 == Vector2.ZERO or _control_point_1.distance_to(_control_point_2) < min_patrouling_distance:
-		var x = randi_range(camera.limit_left + 64, camera.limit_right - 64)
-		var y = randi_range(camera.limit_top + 64, camera.limit_bottom - 64)
+		var x = randi_range(_camera.limit_left + 64, _camera.limit_right - 64)
+		var y = randi_range(_camera.limit_top + 64, _camera.limit_bottom - 64)
 		_control_point_2 = Vector2(x, y)
 		await get_tree().process_frame
 	_can_move = true
@@ -91,6 +89,7 @@ func _on_health_tracker_health_changed(current_health):
 func _on_health_tracker_health_depleted():
 	await _flash_effect.play().finished
 	GameState.score += 1
+	emit_signal("enemy_defeated")
 	queue_free()
 
 

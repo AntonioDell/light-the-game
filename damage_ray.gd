@@ -26,7 +26,6 @@ func _physics_process(delta):
 		add_exception( damageable )
 		force_raycast_update()
 	
-	print(registered_collisions)
 	if registered_collisions.size() == 0: return
 	
 	_can_damage = false
