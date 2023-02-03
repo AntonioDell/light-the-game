@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://b18df4b6ew3oq"]
+
+[ext_resource type="Script" path="res://npcs/shopkeeper/shopkeeper.gd" id="1_etlpo"]
+[ext_resource type="PackedScene" uid="uid://bciel8knyu5ex" path="res://npcs/commons/position_utils.tscn" id="2_qux68"]
+
+[sub_resource type="Gradient" id="Gradient_h16fr"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.527753, 0.386682, 0.464774, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0kaor"]
+gradient = SubResource("Gradient_h16fr")
+width = 32
+height = 32
+
+[sub_resource type="Gradient" id="Gradient_d0y68"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.465241, 0.596678, 0.578515, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c0q3w"]
+gradient = SubResource("Gradient_d0y68")
+width = 24
+height = 18
+
+[sub_resource type="Gradient" id="Gradient_d750d"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.272139, 0.315242, 0.368978, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cniig"]
+gradient = SubResource("Gradient_d750d")
+width = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7s1m2"]
+size = Vector2(32, 18)
+
+[node name="Shopkeeper" type="CharacterBody2D"]
+motion_mode = 1
+slide_on_ceiling = false
+platform_on_leave = 2
+safe_margin = 1.0
+script = ExtResource("1_etlpo")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="1" type="Sprite2D" parent="Sprite"]
+position = Vector2(-19, -51)
+texture = SubResource("GradientTexture2D_0kaor")
+
+[node name="2" type="Sprite2D" parent="Sprite"]
+position = Vector2(-26, -28)
+texture = SubResource("GradientTexture2D_c0q3w")
+
+[node name="Body" type="Sprite2D" parent="Sprite"]
+position = Vector2(0, -32)
+texture = SubResource("GradientTexture2D_cniig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_7s1m2")
+
+[node name="PositionUtils" parent="." instance=ExtResource("2_qux68")]
+min_distance_to_player = 300
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+avoidance_enabled = true
+radius = 64.0
+
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="IdleTimer" to="." method="_set_next_movement_target"]

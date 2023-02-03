@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgnq8uiblb38g"]
+[gd_scene load_steps=12 format=3 uid="uid://m37bwbn2ffxn"]
 
-[ext_resource type="Script" path="res://enemies/dummy_enemy.gd" id="1_l5m5h"]
+[ext_resource type="Script" path="res://npcs/dummy_enemy/dummy_enemy.gd" id="1_l5m5h"]
 [ext_resource type="PackedScene" uid="uid://ctcokcq323wcn" path="res://damageable.tscn" id="2_sb1sg"]
 [ext_resource type="PackedScene" uid="uid://d0rdma5s1was1" path="res://health_tracker.tscn" id="3_xee48"]
-[ext_resource type="PackedScene" path="res://enemies/dummy_enemy_attack.tscn" id="4_hqq8j"]
-[ext_resource type="Animation" uid="uid://br6seuthord0g" path="res://enemies/anim_dummy_attack_anticipate.res" id="4_qg5vd"]
-[ext_resource type="Animation" uid="uid://b4piuxt4m35kg" path="res://enemies/anim_dummy_attack_execute.res" id="5_5pm4a"]
-[ext_resource type="PackedScene" uid="uid://c8g6q77nuod2e" path="res://enemies/flash_effect.tscn" id="7_x03td"]
-[ext_resource type="Texture2D" uid="uid://brcq83dco3wq0" path="res://enemies/flash_effect_texture.tres" id="8_ldmmf"]
+[ext_resource type="PackedScene" path="res://npcs/dummy_enemy/dummy_enemy_attack.tscn" id="4_hqq8j"]
+[ext_resource type="Animation" uid="uid://br6seuthord0g" path="res://npcs/dummy_enemy/anim_dummy_attack_anticipate.res" id="4_qg5vd"]
+[ext_resource type="Animation" uid="uid://b4piuxt4m35kg" path="res://npcs/dummy_enemy/anim_dummy_attack_execute.res" id="5_5pm4a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cenbu"]
 size = Vector2(32, 12)
@@ -59,15 +57,9 @@ attack_animation_player = NodePath("../AnimationPlayer")
 anim_anticipate_attack = ExtResource("4_qg5vd")
 anim_execute_attack = ExtResource("5_5pm4a")
 
-[node name="FlashEffect" parent="." instance=ExtResource("7_x03td")]
-
-[node name="DamageLight" parent="FlashEffect" index="0"]
-texture = ExtResource("8_ldmmf")
-
 [connection signal="damage_taken" from="Damageable" to="." method="_on_damageable_damage_taken"]
 [connection signal="health_depleted" from="HealthTracker" to="." method="_on_health_tracker_health_depleted"]
 [connection signal="attack_finished" from="DummyEnemyAttack" to="." method="_on_dummy_enemy_attack_attack_finished"]
 [connection signal="attack_started" from="DummyEnemyAttack" to="." method="_on_dummy_enemy_attack_attack_started"]
 
 [editable path="Damageable"]
-[editable path="FlashEffect"]

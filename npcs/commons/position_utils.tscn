@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bciel8knyu5ex"]
+
+[ext_resource type="Script" path="res://npcs/commons/position_utils.gd" id="1_gpdf6"]
+
+[node name="SpawnUtils" type="Node"]
+script = ExtResource("1_gpdf6")

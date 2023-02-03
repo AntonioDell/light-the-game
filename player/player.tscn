@@ -7,12 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://brtlthyh5ytpu" path="res://invincibility.tscn" id="5_4knpj"]
 [ext_resource type="Script" path="res://health_tracker.gd" id="6_ha00m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xi8c"]
-size = Vector2(32, 11)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkr8c"]
-size = Vector2(32, 64)
-
 [sub_resource type="Gradient" id="Gradient_7dmh3"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.268915, 0.165039, 0.548083, 1)
@@ -20,6 +14,12 @@ colors = PackedColorArray(0.268915, 0.165039, 0.548083, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_eacxm"]
 gradient = SubResource("Gradient_7dmh3")
 width = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xi8c"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkr8c"]
+size = Vector2(32, 64)
 
 [sub_resource type="Animation" id="Animation_e073p"]
 resource_name = "invincibility_active"
@@ -45,8 +45,12 @@ _data = {
 motion_mode = 1
 script = ExtResource("1_1h71h")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.560784, 0.560784, 0.560784, 1)
+texture = SubResource("GradientTexture2D_eacxm")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 26.5)
+position = Vector2(0, 23.5)
 shape = SubResource("RectangleShape2D_2xi8c")
 
 [node name="Damageable" type="Area2D" parent="."]
@@ -54,10 +58,6 @@ script = ExtResource("2_a4m0c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Damageable"]
 shape = SubResource("RectangleShape2D_fkr8c")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.560784, 0.560784, 0.560784, 1)
-texture = SubResource("GradientTexture2D_eacxm")
 
 [node name="Lamp" parent="." instance=ExtResource("3_gyvet")]
 

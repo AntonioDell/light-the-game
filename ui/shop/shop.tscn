@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://bldv0aexm0r71"]
+
+[ext_resource type="Script" path="res://ui/shop/shop.gd" id="1_f8cyh"]
+[ext_resource type="PackedScene" uid="uid://k6ikhe2qpivi" path="res://ui/shop/choice.tscn" id="2_m6oj8"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_jjrbg"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_akmr0"]
+events = [SubResource("InputEventKey_jjrbg")]
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f8cyh")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="Choice1" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_m6oj8")]
+layout_mode = 2
+cost = 40
+
+[node name="Choice2" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_m6oj8")]
+layout_mode = 2
+cost = 20
+
+[node name="ExitButton" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+shortcut = SubResource("Shortcut_akmr0")
+text = "X"
+
+[node name="AvailableCurrency" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "XXX"
+
+[connection signal="pressed" from="MarginContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://di48ex30irsf7"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="TileSet" uid="uid://clevo6rxjqqmy" path="res://levels/main_tile_set.tres" id="1_jvkl8"]
 [ext_resource type="Texture2D" uid="uid://bigp1r6rbl4ew" path="res://tests/light_cone_1.png" id="2_x3ec1"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://clfhc35n7eqc8" path="res://tests/light_cone_big_1.png" id="6_m7pdf"]
 [ext_resource type="Texture2D" uid="uid://jxuawc5q1bix" path="res://tests/light_beam_1.png" id="7_tfkeu"]
 [ext_resource type="Texture2D" uid="uid://5kx457gmxjv6" path="res://tests/light_beam_2.png" id="8_o4ecx"]
-[ext_resource type="PackedScene" uid="uid://cgnq8uiblb38g" path="res://enemies/dummy_enemy.tscn" id="9_qvemp"]
+[ext_resource type="PackedScene" path="res://npcs/dummy_enemy/dummy_enemy.tscn" id="9_qvemp"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xduo7"]
 polygon = PackedVector2Array(590, 230, 591, 256, 630, 250)

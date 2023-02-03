@@ -27,6 +27,7 @@ func _on_damageable_damage_taken(amount: float):
 	_flash_effect.play()
 
 func _on_health_tracker_health_depleted():
+	GameState.score += 1
 	await _flash_effect.play().finished
 	queue_free()
 

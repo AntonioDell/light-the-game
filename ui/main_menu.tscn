@@ -32,7 +32,6 @@ grow_vertical = 2
 theme = ExtResource("1_luwly")
 theme_override_font_sizes/normal_font_size = 100
 text = "Light, The Game"
-fit_content_height = true
 
 [node name="Subtitle" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -49,7 +48,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 50
 text = "A game about darkness"
-fit_content_height = true
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1

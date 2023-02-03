@@ -14,7 +14,7 @@ const SPEED = 50.0
 		if  _spawn_timer != null:
 			_spawn_timer.wait_time = enemy_spawn_interval
 @export var min_patrouling_distance := 500
-@export var enemy_scene_to_spawn: PackedScene = preload("res://enemies/dummy_enemy.tscn")
+@export var enemy_scene_to_spawn: PackedScene
 
 
 @onready var _player := get_tree().get_first_node_in_group("player") as Node2D

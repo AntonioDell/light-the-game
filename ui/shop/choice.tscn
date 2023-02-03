@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://k6ikhe2qpivi"]
+
+[ext_resource type="Script" path="res://ui/shop/choice.gd" id="1_y61i1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgcin"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 0.686275)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Gradient" id="Gradient_bmtvk"]
+colors = PackedColorArray(0, 0, 0, 1, 0.44316, 0.890334, 0.839701, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7g7gr"]
+gradient = SubResource("Gradient_bmtvk")
+
+[node name="Choice" type="VBoxContainer"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -177.5
+offset_right = 177.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+alignment = 1
+script = ExtResource("1_y61i1")
+
+[node name="ItemInfo" type="Panel" parent="."]
+custom_minimum_size = Vector2(355, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_mgcin")
+
+[node name="MarginContainer" type="MarginContainer" parent="ItemInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VFlowContainer" type="VBoxContainer" parent="ItemInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="Label" parent="ItemInfo/MarginContainer/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Example Item"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ItemInfo/MarginContainer/VFlowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_7g7gr")
+
+[node name="Description" type="Label" parent="ItemInfo/MarginContainer/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Very long example description outlining the very essence of this purchase."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BuyButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Buy (XXX)"
+
+[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

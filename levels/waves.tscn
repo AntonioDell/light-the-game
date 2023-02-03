@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7o0j0a4dvew6"]
+[gd_scene load_steps=3 format=3 uid="uid://ciy3ewy0xwx23"]
 
 [ext_resource type="Script" path="res://levels/waves.gd" id="1_sgdtb"]
+[ext_resource type="PackedScene" uid="uid://bciel8knyu5ex" path="res://npcs/commons/position_utils.tscn" id="2_6xpy4"]
 
 [node name="Waves" type="Node"]
 script = ExtResource("1_sgdtb")
@@ -12,4 +13,4 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="WaveStartDelayTimer" to="." method="next_wave"]
+[node name="PositionUtils" parent="." instance=ExtResource("2_6xpy4")]

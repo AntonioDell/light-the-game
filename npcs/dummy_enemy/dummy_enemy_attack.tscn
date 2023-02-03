@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://enemies/dummy_enemy_attack.gd" id="1_rkj48"]
+[ext_resource type="Script" path="res://npcs/dummy_enemy/dummy_enemy_attack.gd" id="1_rkj48"]
 [ext_resource type="Script" path="res://damage.gd" id="2_b5y5t"]
 
 [node name="DummyEnemyAttack" type="Node2D"]
